@@ -1,45 +1,45 @@
-const serviceModel = require("../models/services.model");
+const airlineModel = require("../models/airline.model");
 
 // Controllers that handle routes' requests
 
 const all = async (req, res) => {
-  const services = await serviceModel.getAll();
-  res.json(services);
+  const airlines = await airlineModel.getAll();
+  res.json(airlines);
 };
 
 const create = async (req, res) => {
-  const service = await serviceModel.create({
+  const airline = await airlineModel.create({
     ...req.body,
   });
 
-  res.status(201).json(service);
+  res.status(201).json(airline);
 };
 
 const search = async (req, res) => {
   const text = req.params.text;
-  const filteredServices = await serviceModel.search({
+  const filteredAirlines = await airlineModel.search({
     name: { $regex: text, $options: "i" },
   });
-  res.json(filteredServices);
+  res.json(filteredAirlines);
 };
 
 const get = async (req, res) => {
   const id = req.params.id;
-  const service = await serviceModel.findById(id);
-  res.json(service);
+  const airline = await airlineModel.findById(id);
+  res.json(airline);
 };
 
 const update = async (req, res) => {
   const id = req.params.id;
-  const service = await serviceModel.updateById(id);
-  res.json(service);
+  const airline = await airlineModel.updateById(id);
+  res.json(airline);
 };
 
 const remove = async (req, res) => {
-  const service = await serviceModel.removeById({
+  const airline = await airlineModel.removeById({
     ...req.body,
   });
-  res.json(service);
+  res.json(airline);
 };
 
 module.exports = {

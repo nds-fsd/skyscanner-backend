@@ -1,48 +1,41 @@
 const mongoose = require("mongoose");
 
 // Creates the schema definition, that is, the fields of a "Note" object
-const serviceModelSchema = mongoose.Schema({
-  title: { type: String, maxLength: 50, required: true },
-  category: { type: String, },
-  location: { type: String, },
-  user: { type: String, },
-  description: { type: String,  },
-  avgRating: { type: Number, min: 0, max: 5},
-  visits: { type: Number},
-  imageSrc: { type: String },
-  imageAlt: { type: String }
-}, {
-  timestamps: true
+const airlineModelSchema = mongoose.Schema({
+  name: { type: String, maxLength: 50, required: true },
+  luggage: { type: Number, },
+  logoURL: { type: String, },
+  color: { type: String, }
 });
 
 // Creates the model that we'll use to communicate to MongoDB
-const ServiceModel = mongoose.model("service", serviceModelSchema);
+const AirlineModel = mongoose.model("airline", airlineModelSchema);
 
 // Adds functions to create, search and retrieve notes
-const create = async (service) => {
-  const serviceCreated = await ServiceModel.create(service);
-  return serviceCreated;
+const create = async (airline) => {
+  const airlineCreated = await AirlineModel.create(airline);
+  return airlineCreated;
 };
 
 const getAll = async () => {
-  const services = await ServiceModel.find();
-  return services;
+  const airlines = await AirlineModel.find();
+  return airlines;
 };
 
 const search = async (query) => {
-  return await ServiceModel.find(query);
+  return await AirlineModel.find(query);
 };
 
 const findById = async (id) => {
-  return await ServiceModel.findById(id)
+  return await AirlineModel.findById(id)
 }
 
 const removeById = async (id) => {
-  return ServiceModel.findByIdAndRemove(id);
+  return AirlineModel.findByIdAndRemove(id);
 };
 
-const updateById = async (service) => {
-  return await ServiceModel.updateOne(service);
+const updateById = async (airline) => {
+  return await AirlineModel.updateOne(airline);
 };
 
 module.exports = {

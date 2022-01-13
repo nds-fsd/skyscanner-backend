@@ -8,7 +8,7 @@ mongoose.connect(process.env.DB_HOST, options);
 const mongo = mongoose.connection;
 mongo.on('error', (err) => console.error(err));
 mongo.once('open', () => {
-  console.log('Connected to TalludoDB')
+  console.log('Connected to SkyScannerDB')
 })
 
 // Creates an express instance and sets it up
@@ -25,8 +25,8 @@ app.use(morgan("dev"));
 app.disable("x-powered-by Nuclio");
 
 // Add services routes to express instance
-const services = require("./src/routers/services.router");
-app.use("/services", services);
+const services = require("./src/routers/airline.router");
+app.use("/airlines", airlines);
 
 // Function that will start the express server when called
 app.listen(5001, () => {
