@@ -25,7 +25,7 @@ app.use(morgan("dev"));
 app.disable("x-powered-by Nuclio");
 
 // Add services routes to express instance
-const services = require("./src/routers/airline.router");
+const airlines = require("./src/routers/airline.router");
 app.use("/airlines", airlines);
 
 // Function that will start the express server when called
