@@ -1,0 +1,20 @@
+[
+	{
+		"_id": "61e18fe27fcac2512ae9a5ff",
+		"from": "Barcelona",
+		"to": "Paris",
+		"price": 80,
+		"airline": "Iberia",
+		"__v": 0
+	},
+	{
+		"_id": "61e190fa0b0e465252768f3b",
+		"from": "Barcelona",
+		"to": "London",
+		"departure_date": "2022-02-15T00:00:00.000Z",
+		"arrival_date": "2022-02-22T00:00:00.000Z",
+		"price": 80,
+		"airline": "Iberia",
+		"__v": 0
+	}
+]
