@@ -1,20 +1,52 @@
 [
 	{
-		"_id": "61e18fe27fcac2512ae9a5ff",
-		"from": "Barcelona",
-		"to": "Paris",
-		"price": 80,
-		"airline": "Iberia",
-		"__v": 0
-	},
-	{
-		"_id": "61e190fa0b0e465252768f3b",
+		"_id": "61e31d4e1d008040fac25556",
 		"from": "Barcelona",
 		"to": "London",
 		"departure_date": "2022-02-15T00:00:00.000Z",
 		"arrival_date": "2022-02-22T00:00:00.000Z",
 		"price": 80,
 		"airline": "Iberia",
+		"__v": 0
+	},
+	{
+		"_id": "61e31dda1d008040fac2555a",
+		"from": "Barcelona",
+		"to": "Paris",
+		"departure_date": "2022-02-18T00:00:00.000Z",
+		"arrival_date": "2022-02-24T00:00:00.000Z",
+		"price": 80,
+		"airline": "Iberia",
+		"__v": 0
+	},
+	{
+		"_id": "61e46104ec3e1f253bc90282",
+		"from": "Barcelona",
+		"to": "Madrid",
+		"departure_date": "2022-01-17T00:00:00.000Z",
+		"arrival_date": "2022-01-20T00:00:00.000Z",
+		"price": 50,
+		"airline": "Air Europa",
+		"__v": 0
+	},
+	{
+		"_id": "61e4613cec3e1f253bc90284",
+		"from": "Barcelona",
+		"to": "Sevilla",
+		"departure_date": "2022-01-18T00:00:00.000Z",
+		"arrival_date": "2022-01-22T00:00:00.000Z",
+		"price": 68,
+		"airline": "Rynair",
+		"__v": 0
+	},
+	{
+		"_id": "61e46166ec3e1f253bc90286",
+		"from": "Barcelona",
+		"to": "Roma",
+		"departure_date": "2022-01-19T00:00:00.000Z",
+		"arrival_date": "2022-01-26T00:00:00.000Z",
+		"price": 165,
+		"airline": "Vueling",
 		"__v": 0
 	}
 ]

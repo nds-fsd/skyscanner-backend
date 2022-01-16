@@ -1,10 +1,10 @@
 const {Schema, model} = require("mongoose");
 
-const allflightsSchema = new Schema({
+const flightsSchema = new Schema({
   from: { type: String},
   to:{ type: String},
-  departure_date: { type: Date},
-  arrival_date: {type: Date},
+  dedate: { type: String},
+  arrdate: {type: String},
   price: {type: Number},
   airline:{type: String} /*(si relacionamos)[
     {
@@ -14,5 +14,7 @@ const allflightsSchema = new Schema({
     }
 ]*/
 });
-const allflightsModel = model('allflights', allflightsSchema)
-module.exports = allflightsModel;
+
+
+const flightsModel = model('flights', flightsSchema)
+module.exports = flightsModel;

@@ -28,8 +28,8 @@ app.disable("x-powered-by Nuclio");
 const airlines = require("./src/routers/airline.router");
 app.use("/airlines", airlines);
 
-const allflights = require("./src/routers/allflights.router");
-app.use("/allflights", allflights);
+const flights = require("./src/routers/flights.router");
+app.use("/flights", flights);
 
 // Function that will start the express server when called
 app.listen(5001, () => {
