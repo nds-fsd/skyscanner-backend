@@ -4,7 +4,9 @@ const flightsControllers = {};
 
 flightsControllers.getallflights = async (req, res) => {
 
-    const allflights = await flightsModel.find();
+
+    const allflights = await flightsModel.find(); //populate('airline')
+       
     res.json(allflights);
 
 };

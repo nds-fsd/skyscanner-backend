@@ -1,52 +1,47 @@
 [
 	{
-		"_id": "61e31d4e1d008040fac25556",
 		"from": "Barcelona",
 		"to": "London",
 		"dedate": "2022-02-15",
 		"arrdate": "2022-02-22",
 		"price": 80,
-		"airline": "Iberia",
-		"__v": 0
+		"airline": "Iberia"
+		
 	},
 	{
-		"_id": "61e31dda1d008040fac2555a",
 		"from": "Barcelona",
 		"to": "Paris",
 		"dedate": "2022-02-18",
 		"arrdate": "2022-02-24",
 		"price": 80,
-		"airline": "Iberia",
-		"__v": 0
+		"airline": "Iberia"
+		
 	},
 	{
-		"_id": "61e46104ec3e1f253bc90282",
 		"from": "Barcelona",
 		"to": "Madrid",
 		"dedate": "2022-01-17",
 		"arrdate": "2022-01-20",
 		"price": 50,
-		"airline": "Air Europa",
-		"__v": 0
+		"airline": "Air Europa"
+	
 	},
 	{
-		"_id": "61e4613cec3e1f253bc90284",
 		"from": "Barcelona",
 		"to": "Sevilla",
 		"dedate": "2022-01-18",
 		"arrdate": "2022-01-22",
 		"price": 68,
-		"airline": "Rynair",
-		"__v": 0
+		"airline": "Rynair"
+		
 	},
 	{
-		"_id": "61e46166ec3e1f253bc90286",
 		"from": "Barcelona",
 		"to": "Roma",
 		"dedate": "2022-01-19",
 		"arrdate": "2022-01-26",
 		"price": 165,
-		"airline": "Vueling",
-		"__v": 0
+		"airline": "Vueling"
+		
 	}
 ]

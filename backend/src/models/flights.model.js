@@ -6,15 +6,13 @@ const flightsSchema = new Schema({
   dedate: { type: String},
   arrdate: {type: String},
   price: {type: Number},
-  airline:{type: String} /*(si relacionamos)[
-    {
-        type: 
-        Schema.Types.ObjectId,
-        ref:'airline'
-    }
-]*/
+  airline: { type: String} // para relacionar airline con la coleccion airline[{type:Schema.Types.ObjectId, ref:'airline'}]
+  
+  
+
 });
 
 
 const flightsModel = model('flights', flightsSchema)
+
 module.exports = flightsModel;

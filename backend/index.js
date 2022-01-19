@@ -28,6 +28,9 @@ app.disable("x-powered-by Nuclio");
 const airlines = require("./src/routers/airline.router");
 app.use("/airlines", airlines);
 
+const airports = require("./src/routers/airports.routers");
+app.use("/airports", airports);
+
 const flights = require("./src/routers/flights.router");
 app.use("/flights", flights);
 
