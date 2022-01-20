@@ -27,6 +27,6 @@ const airportSchema = new Schema({
 ]*/
 });
 
-const Airports = model('airports', airportSchema);
+const Airports = model('airport', airportSchema);
 
 module.exports = Airports;

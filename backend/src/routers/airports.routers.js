@@ -19,7 +19,7 @@ router.route("/:id")
   .delete(removeById)
   .put(updateByID);
    
-router.route('/search')
+router.route('/search/:text')
    .get(searchAirports);
    
 module.exports = router;

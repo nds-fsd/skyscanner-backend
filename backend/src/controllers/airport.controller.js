@@ -9,31 +9,25 @@ airportControllers.getallAirports = async (req, res) => {
 
 airportControllers.getOneFlight = async (req, res) => {
   const id = req.params.id; 
-  Airports.findById(id, {}, {} , (error, airports) => {
+  Airports.findById(id, {}, {} , (error, airport) => {
 
      if(error){
          res.status(500).json({error: error.message});
-     } else if(!airports){
+     } else if(!airport){
          res.status(404).send();
      } else {
-         res.json(airports);
+         res.json(airport);
      }
  }); 
 };
 
 airportControllers.searchAirports = async (req, res) => {
-  const code = req.query.code;
-  const name = req.query.name;
-  const city = req.query.city;
-  const country = req.query.country;
-  const airline = req.query.airline;
-
-  console.log(req.query)
    
-  //const textparam = req.params.textparam;
-  //const flightssearch = await flightsModel.find({from:textparam });
+  const text = req.params.text;
+  const searchAirports = await Airports.find({
+    name: { $regex: text, $options: "e" },
+   });
 
-  const searchAirports = await Airports.find({code, name, city, country, airline});
   res.json(searchAirports);
 
 };
