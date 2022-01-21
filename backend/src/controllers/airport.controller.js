@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const airportControllers = {};
 
 airportControllers.getallAirports = async (req, res) => {
-  const getallAirports = await Airports.find();
+  const getallAirports = await Airports.find();/*.polulate('airline)*/
   res.json(getallAirports);
 }
 

@@ -1,15 +1,24 @@
 const {Schema, model} = require("mongoose");
 
 const flightsSchema = new Schema({
-  from: { type: String},
-  to:{ type: String},
-  dedate: { type: String},
-  arrdate: {type: String},
-  price: {type: Number},
-  airline: { type: String} // para relacionar airline con la coleccion airline[{type:Schema.Types.ObjectId, ref:'airline'}]
-  
-  
 
+    from: { type: String},
+      /*[{
+      type:Schema.Types.ObjectId,
+      ref:'airports',
+      
+      }],*/
+    to: { type: String},/*{
+      type:Schema.Types.ObjectId,
+      ref:'airports',
+      },*/
+    dedate: { type: Date}, //type: Date o crear un campo hora
+    arrdate: {type: Date}, //type: Date o crear un campo hora
+    price: {type: Number},
+    airline: { type: String},/*[{ 
+      type:Schema.Types.ObjectId,
+      ref:'airline',}]*/
+      
 });
 
 

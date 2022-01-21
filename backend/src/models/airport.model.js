@@ -2,7 +2,6 @@ const { Schema, model } = require('mongoose');
 
 const airportSchema = new Schema({
 
-  
 
   code: {
     type: String
