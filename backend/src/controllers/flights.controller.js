@@ -47,6 +47,33 @@ flightsControllers.searchflights = async (req, res) => {
     res.json(flightssearch);
 
 };
+flightsControllers.removeFlightById = (req, res) => {
+    const id = req.params.id;
+    flightsModel.findByIdAndDelete(id, {}, (error, result) =>{
+     if(error){
+         res.status(500).json({error: error.message});
+     }else if(!result){
+         res.status(404);
+     }else{
+         res.status(204).send();
+     }
+    })
+  };
 
+  flightsControllers.updateById = async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+  
+    const updatedFlight = {
+      id:id,
+      from: data.from,
+      to: data.to,
+      dedate: data.dedate,
+      arrdate: data.arrdate,
+      airline: data.airline
+    };
+  
+    res.json({message: "Vuelo actualizado", updatedFlight})
+  };
 
 module.exports = flightsControllers;

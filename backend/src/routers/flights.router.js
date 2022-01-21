@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const {getallflights, createflight, searchflights} = require("../controllers/flights.controller");
+const {getallflights, createflight, searchflights,removeFlightById, updateById} = require("../controllers/flights.controller");
 
 router.route('/')
     .get(getallflights)
     .post(createflight);
    
-    router.route('/search')
+router.route('/search')
     .get(searchflights);
     
-
-
+router.route("/:id")
+    .delete(removeFlightById)
+    .put(updateById);
 
 module.exports = router;
