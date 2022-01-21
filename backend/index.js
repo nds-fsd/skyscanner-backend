@@ -25,11 +25,6 @@ app.use(morgan("dev"));
 app.disable("x-powered-by Nuclio");
 
 // Add services routes to express instance
-const airlines = require("./src/routers/airline.router");
-app.use("/airlines", airlines);
-
-const airports = require("./src/routers/airports.routers");
-app.use("/airports", airports);
 
 const flights = require("./src/routers/flights.router");
 app.use("/flights", flights);

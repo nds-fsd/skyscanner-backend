@@ -1,5 +1,5 @@
 const flightsModel = require("../models/flights.model");
-const Airports = require("../models/airport.model")
+
 const flightsControllers = {};
 
 flightsControllers.getallflights = async (req, res) => {
