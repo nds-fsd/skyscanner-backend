@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 // Creates the schema definition, that is, the fields of a "Note" object
 const airlineModelSchema = mongoose.Schema({
-  name: { type: String, maxLength: 50, required: true },
+  name: { type: String, maxLength: 50 },
   luggage: { type: Number, },
   logoURL: { type: String, },
   color: { type: String, }

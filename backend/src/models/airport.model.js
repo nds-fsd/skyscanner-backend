@@ -7,24 +7,13 @@ const airportSchema = new Schema({
   },
   name: {
     type: String,
-    // required: true
   },
   city: {
     type: String,
-    // required: true
   },
   country: {
-    type: String,
-    // required: true
-  },
-  airline:{type: String} /*(si relacionamos)
-  [
-    {
-      type: 
-      Schema.Types.ObjectId,
-      ref:'airline'
-    }
-]*/
+    type: String
+  }
 });
 
 const Airports = model('airport', airportSchema);

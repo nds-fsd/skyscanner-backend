@@ -49,7 +49,7 @@ airportControllers.createAirport = async (req, res) => {
 
   console.log('Creating new Airport');
 
-  res.json({Message: "Your new Airport was created Succesfully", newAirport});
+  res.status(201).json (newAirport);
 };
 
 
@@ -78,8 +78,16 @@ airportControllers.updateByID = async (req, res) => {
     country: data.country,
     airline: data.airline
   };
-
-  res.json({message: "Your Airport has been updated Succesfully", updatedAirport})
+  Airports.findByIdAndUpdate(id, {}, (error, result) =>{
+    if(error){
+        res.status(500).json({error: error.message});
+    }else if(!result){
+        res.status(404);
+    }else{
+        res.status(204).send();
+    }
+   })
+   res.status(201).json (updatedAirport);
 };
 
 module.exports = airportControllers;

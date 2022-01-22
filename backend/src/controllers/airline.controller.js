@@ -1,4 +1,4 @@
-const airlineModel = require("../models/airline.model");
+const airlineModel = require("../models/airlines.model");
 
 // Controllers that handle routes' requests
 

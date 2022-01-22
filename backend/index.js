@@ -26,13 +26,13 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-const airlines = require("../src/routers/airlines.routers");
+const airlines = require("./src/routers/airlines.routers");
 app.use("/airlines", airlines);
 
-const airports = require("../src/routers/airports.routers");
+const airports = require("./src/routers/airports.routers");
 app.use("/airports", airports);
 
-const flights = require("../src/routers/flights.router");
+const flights = require("./src/routers/flights.routers");
 app.use("/flights", flights);
 
 
