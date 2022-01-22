@@ -10,6 +10,7 @@ router.route('/search')
     .get(searchflights);
     
 router.route("/:id")
+    //.get(searchFlightById)
     .delete(removeFlightById)
     .put(updateById);
 

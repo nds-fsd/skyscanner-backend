@@ -22,7 +22,7 @@ flightsControllers.createflight = async (req, res) => {
         airline
     });
     await newflight.save();
-    res.json('Nuevo vuelo añadido');
+    res.status(201).json(newflight);
 
     /*const airportId = req.body.from;
     const airports = await Airports.findById(airportId);
@@ -47,15 +47,17 @@ flightsControllers.searchflights = async (req, res) => {
     res.json(flightssearch);
 
 };
+
 flightsControllers.removeFlightById = (req, res) => {
     const id = req.params.id;
+    
     flightsModel.findByIdAndDelete(id, {}, (error, result) =>{
      if(error){
          res.status(500).json({error: error.message});
      }else if(!result){
-         res.status(404);
+         res.status(404).send();
      }else{
-         res.status(204).send();
+         res.json(result);
      }
     })
   };
@@ -63,15 +65,24 @@ flightsControllers.removeFlightById = (req, res) => {
   flightsControllers.updateById = async (req, res) => {
     const id = req.params.id;
     const data = req.body;
-  
     const updatedFlight = {
-      id:id,
-      from: data.from,
-      to: data.to,
-      dedate: data.dedate,
-      arrdate: data.arrdate,
-      airline: data.airline
-    };
+        
+        from: data.from,
+        to: data.to,
+        dedate: data.dedate,
+        arrdate: data.arrdate,
+        airline: data.airline
+      };
+    flightsModel.findByIdAndUpdate(id, updatedFlight, {returnDocument: 'after'},(error, result) =>{
+        if(error){
+            res.status(500).json({error: error.message});
+        }else if(!result){
+            res.status(404);
+        }else{
+            res.status(200).send();
+        }
+       })
+    
   
     res.json({message: "Vuelo actualizado", updatedFlight})
   };

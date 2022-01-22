@@ -12,8 +12,8 @@ const flightsSchema = new Schema({
       type:Schema.Types.ObjectId,
       ref:'airports',
       },*/
-    dedate: { type: String}, //type: Date o crear un campo hora
-    arrdate: {type: String}, //type: Date o crear un campo hora
+    dedate: { type: Date}, //type: Date o crear un campo hora
+    arrdate: {type: Date}, //type: Date o crear un campo hora
     price: {type: Number},
     airline: { type: String},/*[{ 
       type:Schema.Types.ObjectId,
