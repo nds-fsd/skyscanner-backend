@@ -1,0 +1,37 @@
+[
+  {
+    "code": "BCN" ,
+    "name": "El Prat",
+    "city": "Barcelona",
+    "country": "Spain",
+    "airline":"Iberia"
+  },
+  {
+    "code": "VCE",
+    "name": "Marco Polo",
+    "city": "Venecia",
+    "country": "Italia",
+    "airline":"Vueling"
+  },
+  {
+    "code": "OPO",
+    "name": "Francisco Sa Carneiro",
+    "city": "Oporto",
+    "country": "Portugal",
+    "airline":"TAP"
+  },
+  {
+    "code": "HEL",
+    "name": "Vantaa",
+    "city": "Helsinki",
+    "country": "Finlandia",
+    "airline":"Finnair"
+  },
+  {
+    "code": "OSL",
+    "name": "Oslo-Gardermoen",
+    "city": "Oslo",
+    "country": "Norway",
+    "airline":"Norwegian"
+  }
+]
