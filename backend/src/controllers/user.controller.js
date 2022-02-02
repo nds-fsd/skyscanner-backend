@@ -36,6 +36,7 @@ const saveUser = async (req, res) => {
     if(!errors.isEmpty()){
       return res.status(400).json(errors);
     }
+    try {
     // We extract the email and password fields from the request body by destructuring
     const { email, password, firstname, lastname } = req.body;
 
@@ -57,7 +58,7 @@ const saveUser = async (req, res) => {
     // We sign a JWT and return it to the user
     const token = jwt.sign({ id: userSaved._id }, process.env.JWT_SECRET);
     return res.status(201).json({ token: token, user: userSaved  });
-  };
+  } catch (error) {res.status(400).send(error)}};
 
   const UserController = {
     findAll,
