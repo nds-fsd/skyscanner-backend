@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userModel = require("../../models/user.model");
+//const token = require("./tokenRoutes");
 
 const login = async (req, res) => {
   // Ideally, we would validate that the input coming from the request is well formed
@@ -14,10 +15,12 @@ const login = async (req, res) => {
   // We hash the password
   const genSalt = 10;
   const passwordHashed = bcrypt.hashSync(password, genSalt);
+  const checkPassword = bcrypt.compareSync(password, user.password);
+  console.log("Check:", checkPassword);
   console.log("donde estas password", passwordHashed)
 
   if (!user) return res.status(400).send("Email does not exist");
-  if (user && user.password !== passwordHashed) return res.status(400).send("Password does not match");
+  if (user && !checkPassword) return res.status(400).send("Password does not match");
 
   // If everything matches, we generate a JWT and send it back to the user
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);

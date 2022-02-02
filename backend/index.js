@@ -18,6 +18,7 @@ const { json, urlencoded } = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 
+
 app.use(cors({
   origin: '*',
   optionsSuccessStatus: 200 
@@ -37,6 +38,7 @@ app.use("/flights", flights);
 
 const login = require("./src/users/login/login.controller");
 app.post("/login",login);
+
 const {UserRouter} = require("./src/routers/user.router")
 app.use("/user", UserRouter);
 

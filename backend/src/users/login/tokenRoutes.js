@@ -19,3 +19,4 @@ app.post('/', req, res =>{
         return res.status(400).send("invalid user");
     }
 })
+//module.exports = token;
