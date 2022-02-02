@@ -35,6 +35,9 @@ app.use("/airports", airports);
 const flights = require("./src/routers/flights.routers");
 app.use("/flights", flights);
 
+const {UserRouter} = require("./src/routers/user.router")
+app.use("/user", UserRouter);
+
 
 app.listen(3020, () => {
   console.log(`REST API listening on http://localhost:3020/`);
