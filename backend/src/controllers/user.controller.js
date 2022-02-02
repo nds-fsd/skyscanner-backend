@@ -37,7 +37,7 @@ const saveUser = async (req, res) => {
       return res.status(400).json(errors);
     }
     // We extract the email and password fields from the request body by destructuring
-    const { email, password } = req.body;
+    const { email, password, firstname, lastname } = req.body;
 
     //TODO: comprobar si ya existe el email en la BD
   
@@ -47,6 +47,8 @@ const saveUser = async (req, res) => {
   
     // We save on db a new user with the password hashed
     const newUser = new User({
+      firstname: firstname,
+      lastname: lastname,      
       email: email,
       password: passwordHashed,
     });
