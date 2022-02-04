@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userModel = require("../../models/user.model");
-//const token = require("./tokenRoutes");
 
 const login = async (req, res) => {
   // Ideally, we would validate that the input coming from the request is well formed
@@ -15,8 +14,6 @@ const login = async (req, res) => {
   // We hash the password
   const genSalt = 10;
   const passwordHashed = bcrypt.hashSync(password, genSalt);
-  const checkPassword = bcrypt.compareSync(password, user.password);
-  console.log("Check:", checkPassword);
   console.log("donde estas password", passwordHashed)
 
   if (!user) return res.status(400).send("Email does not exist");
