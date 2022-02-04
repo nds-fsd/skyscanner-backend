@@ -2,8 +2,14 @@
 require("dotenv").config();
 // Creates a mongoose instance and connects to MongoDB
 const mongoose = require("mongoose");
-const options = { useNewUrlParser: true, useUnifiedTopology: true };
-mongoose.connect(process.env.DB_HOST, options);
+//const options = { useNewUrlParser: true, useUnifiedTopology: true };
+try {
+  mongoose.connect( process.env.DB_ATLAS, {useNewUrlParser: true, useUnifiedTopology: true}, () =>
+  console.log("connected"));    
+  }catch (error) { 
+  console.log("could not connect");    
+  }
+//mongoose.connect(process.env.DB_HOST, options);
 const mongo = mongoose.connection;
 mongo.on('error', (err) => console.error(err));
 mongo.once('open', () => {

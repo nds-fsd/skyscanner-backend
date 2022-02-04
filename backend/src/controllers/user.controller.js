@@ -36,16 +36,24 @@ const saveUser = async (req, res) => {
     if(!errors.isEmpty()){
       return res.status(400).json(errors);
     }
+
     try {
     // We extract the email and password fields from the request body by destructuring
-    const { email, password, firstname, lastname } = req.body;
+    const {firstname, lastname, email, password} = req.body;
 
     //TODO: comprobar si ya existe el email en la BD
-  
+
+    const emailexist = await User.findOne({email}).exec();
+
+      if (emailexist) {
+
+        return res.status(409).send({message:'email aready exists'});
+       } 
+     
     // We hash the password
     const genSalt = 10;
     const passwordHashed = bcrypt.hashSync(password, genSalt);
-  
+      
     // We save on db a new user with the password hashed
     const newUser = new User({
       firstname: firstname,
@@ -53,12 +61,13 @@ const saveUser = async (req, res) => {
       email: email,
       password: passwordHashed,
     });
-    const userSaved = await newUser.save();
-  
+ 
+  const userSaved = await newUser.save();
     // We sign a JWT and return it to the user
     const token = jwt.sign({ id: userSaved._id }, process.env.JWT_SECRET);
-    return res.status(201).json({ token: token, user: userSaved  });
-  } catch (error) {res.status(400).send(error)}};
+    return res.status(201).json({ token: token, user: userSaved, message:'Registration successful' });
+
+  } catch (error) {res.status(500).send(error)}};
 
   const UserController = {
     findAll,
