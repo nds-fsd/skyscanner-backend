@@ -33,13 +33,13 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-const airlines = require("./src/routers/airlines.routers");
+const airlines = require("./src/routers/airlines.router");
 app.use("/airlines", airlines);
 
-const airports = require("./src/routers/airports.routers");
+const airports = require("./src/routers/airports.router");
 app.use("/airports", airports);
 
-const flights = require("./src/routers/flights.routers");
+const flights = require("./src/routers/flights.router");
 app.use("/flights", flights);
 
 const login = require("./src/users/login/login.controller");
