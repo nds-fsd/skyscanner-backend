@@ -45,6 +45,7 @@ app.use("/flights", flights);
 const login = require("./src/controllers/login.controller");
 app.post("/login",login);
 
+
 const {UserRouter} = require("./src/routers/user.router")
 app.use("/user", UserRouter);
 
