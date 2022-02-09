@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 //const options = { useNewUrlParser: true, useUnifiedTopology: true };
 try {
   mongoose.connect( process.env.DB_ATLAS, {useNewUrlParser: true, useUnifiedTopology: true}, () =>
-  console.log("connected"));    
+  console.log("connected to Mongo Atlas"));    
   }catch (error) { 
   console.log("could not connect");    
   }
@@ -42,7 +42,7 @@ app.use("/airports", airports);
 const flights = require("./src/routers/flights.router");
 app.use("/flights", flights);
 
-const login = require("./src/users/login/login.controller");
+const login = require("./src/controllers/login.controller");
 app.post("/login",login);
 
 const {UserRouter} = require("./src/routers/user.router")
