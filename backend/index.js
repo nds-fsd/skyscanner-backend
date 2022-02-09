@@ -42,8 +42,9 @@ app.use("/airports", airports);
 const flights = require("./src/routers/flights.router");
 app.use("/flights", flights);
 
-const login = require("./src/users/login/login.controller");
+const login = require("./src/controllers/login.controller");
 app.post("/login",login);
+
 
 const {UserRouter} = require("./src/routers/user.router")
 app.use("/user", UserRouter);
