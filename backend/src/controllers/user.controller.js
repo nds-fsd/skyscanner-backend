@@ -41,7 +41,11 @@ const saveUser = async (req, res) => {
     const { email, password, firstname, lastname } = req.body;
 
     //TODO: comprobar si ya existe el email en la BD
-  
+    const emailexist = await User.findOne({email}).exec();
+
+    if (emailexist){
+      return res.status(409).send({message:"email already exists"});
+    }
     // We hash the password
     const genSalt = 10;
     const passwordHashed = bcrypt.hashSync(password, genSalt);
