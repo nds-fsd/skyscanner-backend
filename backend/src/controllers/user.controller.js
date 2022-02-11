@@ -13,22 +13,6 @@ const findAll = (req, res) => {
     User.find().then(handleSuccess).catch(handleError);
 };
 
-// Creación de user sin hasheo de password.
-// const create = (req, res) => {
-// const body = req.body
-// if (!body.email){
-//     return  res.status(400).json("email not recieved");
-// }
-// const handleSuccess = (user) => {
-//     res.status(201).json(user);
-// };
-// const handleError = (error) => {
-//     res.status(500).json(error);
-// }
-// User.create(body).then(handleSuccess).catch(handleError)
-// };
-
-
 const saveUser = async (req, res) => {
     // Ideally, we would validate that the input coming from the request is well formed
   
@@ -37,7 +21,7 @@ const saveUser = async (req, res) => {
       return res.status(400).json(errors);
     }
     try {
-    // We extract the email and password fields from the request body by destructuring
+    
     const { email, password, firstname, lastname } = req.body;
 
     //TODO: comprobar si ya existe el email en la BD
