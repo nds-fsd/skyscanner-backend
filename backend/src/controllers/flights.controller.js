@@ -12,22 +12,18 @@ flightsControllers.getallflights = async (req, res) => {
 
 flightsControllers.createflight = async (req, res) => {
 
-    const { from, to ,dedate, arrdate, price, airline} = req.body;
+    const { from, to ,dedate, price, airline, flighttime} = req.body;
     const newflight = new flightsModel({
         from,
         to,
         dedate,
-        arrdate,
         price,
-        airline
+        airline,
+        flighttime
     });
     await newflight.save();
     res.status(201).json(newflight);
 
-    /*const airportId = req.body.from;
-    const airports = await Airports.findById(airportId);
-    airports.city.push(newflight);
-    await airports.save();*/
 };
 
 
@@ -36,13 +32,11 @@ flightsControllers.searchflights = async (req, res) => {
     const from = req.query.from;
 	const to = req.query.to;
     const dedate = req.query.dedate;
-    const arrdate = req.query.arrdate;
-    
-    console.log(req.query)
-     
-    //const textparam = req.params.textparam;
-    //const flightssearch = await flightsModel.find({from:textparam });
-    const flightssearch = await flightsModel.find({from, to, dedate, arrdate});
+    const fecha = new Date(dedate);
+    const dias = 1; // Número de días a sumar
+    fecha.setDate(fecha.getDate() + dias);
+   
+    const flightssearch = await flightsModel.find({from, to, dedate:{"$gte": dedate, "$lt": fecha}});
     
     res.json(flightssearch);
 
