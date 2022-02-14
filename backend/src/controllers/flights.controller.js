@@ -64,9 +64,10 @@ flightsControllers.removeFlightById = (req, res) => {
         from: data.from,
         to: data.to,
         dedate: data.dedate,
-        arrdate: data.arrdate,
+        //arrdate: data.arrdate,
         price: data.price,
-        airline: data.airline
+        airline: data.airline,
+        flighttime: data.flighttime
       };
     flightsModel.findByIdAndUpdate(id, updatedFlight, {returnDocument: 'after'},(error, result) =>{
         if(error){
