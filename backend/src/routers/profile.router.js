@@ -1,7 +1,7 @@
 const express = require("express");
 const {body} = require("express-validator");
 const ProfileRouter = express.Router();
-const {removeProfileById, updateProfileById, changePassword, getOneUser, addAirportById} = require("../controllers/profile.controller");
+const {removeProfileById, updateProfileById, changePassword, getOneUser, addAirportById, addToFavFlight} = require("../controllers/profile.controller");
 
 ProfileRouter.route('/:id')
     .get(getOneUser);
@@ -16,6 +16,9 @@ ProfileRouter.route("/favairport/:id")
 
 ProfileRouter.route("/:id").post(body("password", "Password must have at least 8 characters, one digit [0-9], At least one lowercase character, at least one uppercase character, at least one special character").isLength({min:8}).matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"),
 changePassword);
+
+ProfileRouter.route("/favflights/:email")
+    .put(addToFavFlight);
 
 
 module.exports = {ProfileRouter};

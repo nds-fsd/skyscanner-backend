@@ -99,7 +99,7 @@ profileControllers.changePassword = (req, res, next) => {
     }
     };
 
-    profileControllers.getOneUser = async (req, res) => {
+profileControllers.getOneUser = async (req, res) => {
       const id = req.params.id; 
       User.findById(id, {}, {} , (error, profile) => {
     
@@ -112,9 +112,38 @@ profileControllers.changePassword = (req, res, next) => {
          }
      }); 
     };
-    /*profileControllers.saveFlights = async (req, res) => {
-      const id = req.params.id; 
-      const addfav = await User.updateOne({ $push: { fav: id } });
-    }*/
+    /*
+profileController.addToFav = async(req, res) => {
+
+  const fav = {"fav": req.body.fav};
+  User.findOneAndUpdate({email: req.user.email}, {$push: {fav: fav}});
+};*/
+
+profileControllers.addToFavFlight = async (req, res) => {
+  const email = req.params.email;
+  const data = req.body;
+  const addFav = await User.findOneAndUpdate({email: email}, {$push: {fav: data.fav}});
+
+  res.json({message: "Add flight to wishlist", addFav});
+
+};
+  /*const addFav = {
+      
+      fav:  User.fav.push(data.fav)
+     
+    };
+  User.findByIdAndUpdate(id, addFav, {returnDocument: 'after'},(error, result) =>{
+      if(error){
+          res.status(500).json({error: error.message});
+      }else if(!result){
+          res.status(404);
+      }else{
+          res.status(200).send();
+      }
+     })
+  
+
+  res.json({message: "Add flight to wishlist", addFav})
+};*/
     module.exports = profileControllers;
     
