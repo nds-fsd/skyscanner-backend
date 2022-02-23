@@ -113,6 +113,11 @@ profileControllers.getOneUser = async (req, res) => {
      }); 
     };
    
+profileControllers.getOneUserbyEmail = async (req, res) => {
+  const email = req.params.email;
+  const getUserbyEmail = await User.findOne({email: email}).exec();
+  res.json({getUserbyEmail}); 
+    };
 
 profileControllers.addToFavFlight = async (req, res) => {
   const email = req.params.email;
