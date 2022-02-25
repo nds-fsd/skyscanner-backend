@@ -46,7 +46,7 @@ const saveUser = async (req, res) => {
     // We sign a JWT and return it to the user
     const token = jwt.sign({ id: userSaved._id }, process.env.JWT_SECRET);
     return res.status(201).json({ token: token, user: userSaved  });
-  } catch (error) {res.status(400).send(error)}};
+  } catch (error) {res.status(500).send(error)}};
 
   const UserController = {
     findAll,
