@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+//const { findOne } = require("../models/user.model");
 const User = require("../models/user.model");
 
 const login = async (req, res) => {
@@ -15,7 +16,8 @@ try {
 
   // If everything matches, we generate a JWT and send it back to the user
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-  return res.status(200).json({ token: token });
+  
+  return res.status(200).json({ token: token, user:user });
 
 } catch (error) {res.status(500).send(error)}
 };
