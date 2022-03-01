@@ -1,5 +1,5 @@
 const {Schema, model} = require("mongoose");
-const Float = require('mongoose-float');
+//const Float = require('mongoose-float');
 const flightsSchema = new Schema({
 
     from: { type: String},
@@ -18,7 +18,8 @@ const flightsSchema = new Schema({
     airline: { type: String},/*[{ 
       type:Schema.Types.ObjectId,
       ref:'airline',}]*/
-    flighttime: {type: Float}
+    flighttime: {type: Number},
+    seats: {type: Number}
       
 });
 

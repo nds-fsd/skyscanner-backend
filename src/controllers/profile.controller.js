@@ -43,7 +43,7 @@ profileControllers.updateProfileById = async (req, res) => {
 
   res.json({message: "updated user", updatedUser})
 };
-
+try {
 profileControllers.addAirportById = async (req, res) => {
   const id = req.params.id;
   const data = req.body;
@@ -52,20 +52,23 @@ profileControllers.addAirportById = async (req, res) => {
       prefairport: data.prefairport,
      
     };
+  const user = await User.findById(id).exec();
+
   User.findByIdAndUpdate(id, addAirport, {returnDocument: 'after'},(error, result) =>{
       if(error){
           res.status(500).json({error: error.message});
       }else if(!result){
           res.status(404);
       }else{
-          res.status(200).send();
+        res.status(200).send();
+          
       }
      })
   
 
-  res.json({message: "Add airport", addAirport})
-};
-
+  res.json({message: "Add airport", user})
+};}
+catch (error) {res.status(500).send(error)}
 profileControllers.changePassword = (req, res, next) => {
 
     const errors = validationResult(req);

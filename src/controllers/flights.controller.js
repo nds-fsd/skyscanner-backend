@@ -12,20 +12,20 @@ flightsControllers.getallflights = async (req, res) => {
 
 flightsControllers.createflight = async (req, res) => {
 
-    const { from, to ,dedate, price, airline, flighttime} = req.body;
+    const { from, to ,dedate, price, airline, flighttime, seats} = req.body;
     const newflight = new flightsModel({
         from,
         to,
         dedate,
         price,
         airline,
-        flighttime
+        flighttime,
+        seats
     });
     await newflight.save();
     res.status(201).json(newflight);
 
 };
-
 
 flightsControllers.searchflights = async (req, res) => {
     
