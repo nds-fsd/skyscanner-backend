@@ -52,6 +52,6 @@ app.use("/user", UserRouter);
 const {ProfileRouter} = require("./src/routers/profile.router")
 app.use("/profile", ProfileRouter);
 
-app.listen(3020, () => {
+app.listen(process.env.PORT, () => {
   console.log(`REST API listening on http://localhost:3020/`);
 });
