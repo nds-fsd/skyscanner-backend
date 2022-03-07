@@ -20,6 +20,7 @@ profileControllers.removeProfileById = (req, res) => {
   })
 };
 }catch (error) {res.status(500).send(error)};
+
 try  {
 profileControllers.updateProfileById = async (req, res) => {
   const id = req.params.id;
@@ -118,6 +119,7 @@ profileControllers.getOneUser = async (req, res) => {
          }
      }); 
     };} catch (error) {res.status(500).send(error)};
+
 try {  
 profileControllers.getOneUserbyEmail = async (req, res) => {
   const email = req.params.email;
@@ -134,6 +136,16 @@ profileControllers.addToFavFlight = async (req, res) => {
   res.json({message: "Add flight to wishlist"});
 
 };} catch (error) {res.status(500).send(error)};
+
+profileControllers.addBooking = async (req, res) => {
+  
+  const id = req.params.id;
+  const data = req.body;
+  const addbooking = await User.findByIdAndUpdate({_id: id}, {$push: {booking: data.booking}});
+  res.json({message: "Add booking"});
+
+}
+
   
     module.exports = profileControllers;
     
