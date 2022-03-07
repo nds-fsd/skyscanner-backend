@@ -7,7 +7,7 @@ airportControllers.getallAirports = async (req, res) => {
 }
 
 
-airportControllers.getOneFlight = async (req, res) => {
+airportControllers.getOneAirport = async (req, res) => {
   const id = req.params.id; 
   Airports.findById(id, {}, {} , (error, airport) => {
 

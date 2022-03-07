@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {
    getallAirports, 
-   getOneFlight, 
+   getOneAirport, 
    searchAirports, 
    createAirport, 
    removeById, 
@@ -15,7 +15,7 @@ router.route('/')
    .post(createAirport);
 
 router.route("/:id")
-  .get(getOneFlight)
+  .get(getOneAirport)
   .delete(removeById)
   .put(updateByID);
    

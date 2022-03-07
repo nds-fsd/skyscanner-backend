@@ -19,7 +19,7 @@ changePassword);
 
 ProfileRouter.route("/datauser/:email").get(getOneUserbyEmail);
 
-ProfileRouter.route("/favflights/:email")
+ProfileRouter.route("/favflights/:id")
     .put(addToFavFlight);
 
 

@@ -17,7 +17,7 @@ try {
   // If everything matches, we generate a JWT and send it back to the user
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
   
-  return res.status(200).json({ token: token, user:user });
+  return res.status(200).json({ token: token });
 
 } catch (error) {res.status(500).send(error)}
 };

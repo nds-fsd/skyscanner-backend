@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const {validationResult} = require("express-validator");
 
 const profileControllers = {};
-
+try {
 profileControllers.removeProfileById = (req, res) => {
   const id = req.params.id;
   
@@ -19,7 +19,8 @@ profileControllers.removeProfileById = (req, res) => {
    }
   })
 };
-
+}catch (error) {res.status(500).send(error)};
+try  {
 profileControllers.updateProfileById = async (req, res) => {
   const id = req.params.id;
   const data = req.body;
@@ -27,8 +28,7 @@ profileControllers.updateProfileById = async (req, res) => {
       
       firstname: data.firstname,
       lastname: data.lastname,
-      
-     
+    
     };
   User.findByIdAndUpdate(id, updatedUser, {returnDocument: 'after'},(error, result) =>{
       if(error){
@@ -42,7 +42,8 @@ profileControllers.updateProfileById = async (req, res) => {
   
 
   res.json({message: "updated user", updatedUser})
-};
+};} catch (error) {res.status(500).send(error)};
+
 try {
 profileControllers.addAirportById = async (req, res) => {
   const id = req.params.id;
@@ -52,7 +53,7 @@ profileControllers.addAirportById = async (req, res) => {
       prefairport: data.prefairport,
      
     };
-  const user = await User.findById(id).exec();
+  //const user = await User.findById(id).exec();
 
   User.findByIdAndUpdate(id, addAirport, {returnDocument: 'after'},(error, result) =>{
       if(error){
@@ -65,10 +66,11 @@ profileControllers.addAirportById = async (req, res) => {
       }
      })
   
-
-  res.json({message: "Add airport", user})
+  res.json({message: "Add airport"})
 };}
-catch (error) {res.status(500).send(error)}
+catch (error) {res.status(500).send(error)};
+
+try {
 profileControllers.changePassword = (req, res, next) => {
 
     const errors = validationResult(req);
@@ -100,8 +102,9 @@ profileControllers.changePassword = (req, res, next) => {
         }
       }));
     }
-    };
+    };} catch (error) {res.status(500).send(error)};
 
+try {
 profileControllers.getOneUser = async (req, res) => {
       const id = req.params.id; 
       User.findById(id, {}, {} , (error, profile) => {
@@ -114,22 +117,23 @@ profileControllers.getOneUser = async (req, res) => {
              res.json(profile);
          }
      }); 
-    };
-   
+    };} catch (error) {res.status(500).send(error)};
+try {  
 profileControllers.getOneUserbyEmail = async (req, res) => {
   const email = req.params.email;
   const getUserbyEmail = await User.findOne({email: email}).exec();
   res.json({getUserbyEmail}); 
-    };
+    };} catch (error) {res.status(500).send(error)};
 
+try {
 profileControllers.addToFavFlight = async (req, res) => {
-  const email = req.params.email;
-  //const data = req.body;
-  const addFav = await User.findOneAndUpdate({email: email}, {$push: {fav: data.fav}});
+  const id = req.params.id;
+  const data = req.body;
+  const addFav = await User.findByIdAndUpdate({_id: id}, {$push: {fav: data.fav}});
 
-  res.json({message: "Add flight to wishlist", addFav});
+  res.json({message: "Add flight to wishlist"});
 
-};
+};} catch (error) {res.status(500).send(error)};
   
     module.exports = profileControllers;
     

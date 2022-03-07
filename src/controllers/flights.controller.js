@@ -1,15 +1,16 @@
 const flightsModel = require("../models/flights.model");
 
 const flightsControllers = {};
-
+try{
 flightsControllers.getallflights = async (req, res) => {
 
     const allflights = await flightsModel.find();
     //.populate('from').populate('to').populate('airline');
        
     res.json(allflights);
-};
+};} catch (error) {res.status(500).send(error)};
 
+try{
 flightsControllers.createflight = async (req, res) => {
 
     const { from, to ,dedate, price, airline, flighttime, seats} = req.body;
@@ -25,7 +26,7 @@ flightsControllers.createflight = async (req, res) => {
     await newflight.save();
     res.status(201).json(newflight);
 
-};
+};} catch (error) {res.status(500).send(error)};
 
 flightsControllers.searchflights = async (req, res) => {
     
@@ -41,6 +42,21 @@ flightsControllers.searchflights = async (req, res) => {
     res.json(flightssearch);
 
 };
+
+flightsControllers.getOneFlight = async (req, res) => {
+    const id = req.params.id; 
+
+    flightsModel.findById(id, {}, {} , (error, flight) => {
+  
+       if(error){
+           res.status(500).json({error: error.message});
+       } else if(!flight){
+           res.status(404).send();
+       } else {
+           res.json(flight);
+       }
+   }); 
+  };
 
 flightsControllers.removeFlightById = (req, res) => {
     const id = req.params.id;
