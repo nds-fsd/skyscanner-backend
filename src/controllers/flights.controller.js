@@ -28,6 +28,7 @@ flightsControllers.createflight = async (req, res) => {
 
 };} catch (error) {res.status(500).send(error)};
 
+try {
 flightsControllers.searchflights = async (req, res) => {
     
     const from = req.query.from;
@@ -39,9 +40,15 @@ flightsControllers.searchflights = async (req, res) => {
    
     const flightssearch = await flightsModel.find({from, to, dedate:{"$gte": dedate, "$lt": fecha}});
     
-    res.json(flightssearch);
+    if(flightssearch.length === 0){
+        res.status(404).send("no flights found");
+    }
+     else {
+        res.json(flightssearch);
+    }
+    //res.json(flightssearch);
 
-};
+};} catch (error) {res.status(500).send(error)};  
 
 flightsControllers.getOneFlight = async (req, res) => {
     const id = req.params.id; 
@@ -80,10 +87,10 @@ flightsControllers.removeFlightById = (req, res) => {
         from: data.from,
         to: data.to,
         dedate: data.dedate,
-        //arrdate: data.arrdate,
         price: data.price,
         airline: data.airline,
-        flighttime: data.flighttime
+        flighttime: data.flighttime,
+        seats: data.seats
       };
     flightsModel.findByIdAndUpdate(id, updatedFlight, {returnDocument: 'after'},(error, result) =>{
         if(error){
@@ -97,6 +104,27 @@ flightsControllers.removeFlightById = (req, res) => {
     
   
     res.json({message: "Vuelo actualizado", updatedFlight})
+  };
+
+  flightsControllers.updateSeats = async (req, res) => {
+
+    const data = req.body;
+    const id = req.params.id;
+    const bookingseats = data.bookingseats;
+    
+    const flightseats = await flightsModel.findByIdAndUpdate(
+        {_id:id},
+        {$inc: {seats: - bookingseats }}
+        );
+    
+        if(!flightseats){
+            res.status(404).send("no flights found");
+        }
+            
+        else {
+            res.json("update seats");
+        }
+        
   };
 
 module.exports = flightsControllers;

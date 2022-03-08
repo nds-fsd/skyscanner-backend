@@ -1,4 +1,5 @@
-const User =require("../models/user.model");
+const User = require("../models/user.model");
+const flightsModel = require("../models/flights.model");
 const bcrypt = require("bcrypt");
 const mongoose = require('mongoose');
 const jwt = require("jsonwebtoken");
@@ -137,14 +138,17 @@ profileControllers.addToFavFlight = async (req, res) => {
 
 };} catch (error) {res.status(500).send(error)};
 
+try {
 profileControllers.addBooking = async (req, res) => {
   
   const id = req.params.id;
   const data = req.body;
   const addbooking = await User.findByIdAndUpdate({_id: id}, {$push: {booking: data.booking}});
+  
+  
   res.json({message: "Add booking"});
 
-}
+}; } catch (error) {res.status(500).send(error)};
 
   
     module.exports = profileControllers;
