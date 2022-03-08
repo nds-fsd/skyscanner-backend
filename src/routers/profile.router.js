@@ -1,7 +1,7 @@
 const express = require("express");
 const {body} = require("express-validator");
 const ProfileRouter = express.Router();
-const {removeProfileById, updateProfileById, changePassword, getOneUser, addAirportById,getOneUserbyEmail, addToFavFlight, addBooking} = require("../controllers/profile.controller");
+const {removeProfileById, updateProfileById, changePassword, getOneUser, addAirportById,getOneUserbyEmail, addToFavFlight, addBooking, deleteOneBooking} = require("../controllers/profile.controller");
 
 ProfileRouter.route('/:id')
     .get(getOneUser);
@@ -24,6 +24,9 @@ ProfileRouter.route("/favflights/:id")
 
 ProfileRouter.route("/booking/:id")
     .put(addBooking);
+
+ProfileRouter.route("/removebooking/:id")
+    .put(deleteOneBooking);
 
 
 module.exports = {ProfileRouter};

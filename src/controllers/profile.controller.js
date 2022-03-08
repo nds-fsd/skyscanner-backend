@@ -150,6 +150,19 @@ profileControllers.addBooking = async (req, res) => {
 
 }; } catch (error) {res.status(500).send(error)};
 
+profileControllers.deleteOneBooking = async (req, res) => {
+
+  const id = req.params.id;
+  const data = req.body;
+  
+  delbooking = await User.findByIdAndUpdate({_id:id},
+    { $pull: { booking: {"_id":data.bookingId} } },
+    { safe: true, multi:true }
+  );
+  
+  res.json({message: "remove booking"});
+};
+
   
     module.exports = profileControllers;
     
