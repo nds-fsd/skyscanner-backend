@@ -52,6 +52,9 @@ app.use("/user", UserRouter);
 const {ProfileRouter} = require("./src/routers/profile.router")
 app.use("/profile", ProfileRouter);
 
+const {FavoriteRouter} = require("./src/routers/favorite.router")
+app.use("/favorite", FavoriteRouter);
+
 app.listen(3020, () => {
   console.log(`REST API listening on http://localhost:3020/`);
 });

@@ -7,6 +7,10 @@ const userSchema = new mongoose.Schema({
     password:{type:String, required:true},
     prefairport: {type:String},
     fav: {type:Array},
+    /*[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "flights"
+    }],*/
     booking: [
             {   
             outbound:String,
