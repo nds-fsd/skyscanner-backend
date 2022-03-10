@@ -1,6 +1,4 @@
-// Imports dotenv library (this library loads into the app all environment variables located on .env file)
 require("dotenv").config();
-// Creates a mongoose instance and connects to MongoDB
 const mongoose = require("mongoose");
 //const options = { useNewUrlParser: true, useUnifiedTopology: true };
 try {
@@ -45,15 +43,17 @@ app.use("/flights", flights);
 const login = require("./src/controllers/login.controller");
 app.post("/login",login);
 
-
-const {UserRouter} = require("./src/routers/user.router")
+const UserRouter = require("./src/routers/user.router")
 app.use("/user", UserRouter);
 
-const {ProfileRouter} = require("./src/routers/profile.router")
+const ProfileRouter = require("./src/routers/profile.router")
 app.use("/profile", ProfileRouter);
 
-const {FavoriteRouter} = require("./src/routers/favorite.router")
+const FavoriteRouter = require("./src/routers/favorite.router")
 app.use("/favorite", FavoriteRouter);
+
+const BookingRouter = require("./src/routers/booking.router")
+app.use("/booking", BookingRouter);
 
 app.listen(3020, () => {
   console.log(`REST API listening on http://localhost:3020/`);

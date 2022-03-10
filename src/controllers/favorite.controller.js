@@ -1,26 +1,54 @@
-const favoriteModel = require("../models/favorite.model");
-const userModel = require("../models/user.model");
+const favoriteModel = require("../models/favorite.model");  
 const favoriteControllers = {};
 
 try {
     favoriteControllers.getFavFlights = async (req, res) => {
-        const id = req.params.id;
-        console.log(id)
-        const favoritesSearch = await favoriteModel.find({user_id:id});
-        console.log(favoritesSearch)
+        const user_id = req.params.id;
+        
+        const favoritesSearch = await favoriteModel.find({"user_id": user_id}).populate("flight_id");
         
         if(favoritesSearch.length === 0){
             res.status(404).send("you don't have any favorite flight");
-        }
-         else {
-            res.json(favoritesSearch);
+        } else {
+            const favFlights = favoritesSearch.map(f => f.flight_id);
+            res.json(favFlights);
         }
     };
 } catch (error) {
     res.status(500).send(error)
 }; 
 
-//TODO:::controlador para hacer un post a favorite
+try {
+    favoriteControllers.getFavs = async (req, res) => {
+        const favs = await favoriteModel.find();
+        res.json(favs);
+    }
+} catch (error) {
+    res.status(500).send(error);
+}
 
+try {
+    favoriteControllers.saveFav = async (req, res) => {
+        const fav = req.body;
+    
+        const favExists = await favoriteModel.findOne({
+            ...fav
+        }).exec();
+
+        if (favExists){
+            return res.status(409).send({
+                message:"Este vuelo ya esta guardado como favorito"
+            });
+        }
+
+        const favSaved = await favoriteModel.create({
+            ...fav,
+        });
+
+        res.status(201).json(favSaved);
+    };
+} catch (error) {
+    res.status(500).send(error);
+}
 
 module.exports = favoriteControllers;

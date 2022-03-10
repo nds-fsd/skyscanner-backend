@@ -1,6 +1,5 @@
 const mongoose = require ('mongoose');
-const favoriteSchema = new mongoose.Schema({
-    
+const bookingSchema = new mongoose.Schema({
     flight_id: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "flights"
@@ -11,6 +10,5 @@ const favoriteSchema = new mongoose.Schema({
     }]
 });
 
-
-const favorite = mongoose.model("favorite", favoriteSchema);
-module.exports = favorite;
+const booking = mongoose.model("booking", bookingSchema);
+module.exports = booking;
