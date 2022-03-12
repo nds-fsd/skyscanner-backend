@@ -8,7 +8,7 @@ try {
         const favoritesSearch = await favoriteModel.find({"user_id": user_id}).populate("flight_id");
         
         if(favoritesSearch.length === 0){
-            res.status(404).send("you don't have any favorite flight");
+            res.send("You don't have any favorite flight");
         } else {
             const favFlights = favoritesSearch.map(f => f.flight_id);
             res.json(favFlights);

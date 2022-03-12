@@ -8,7 +8,7 @@ try {
         const searchResult = await BookingModel.find({"user_id": user_id}).populate("flight_id");
         
         if(searchResult.length === 0){
-            res.status(404).send("you don't have any favorite flight");
+            res.send("You don't have any favorite flight");
         } else {
             const bookedFlights = searchResult.map(f => f.flight_id);
             res.json(bookedFlights);
