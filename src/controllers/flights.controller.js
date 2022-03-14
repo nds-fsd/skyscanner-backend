@@ -45,14 +45,15 @@ const flightsControllers = {};
         const dias = 1; // Número de días a sumar
         fecha.setDate(fecha.getDate() + dias);
    
-        const flightssearch = await flightsModel.find({from, to, dedate:{"$gte": dedate, "$lt": fecha}});
+        const flightsSearchRaw = await flightsModel.find({from, to, dedate:{"$gte": dedate, "$lt": fecha}});
+
+        const flightssearch = flightsSearchRaw.filter((f) => f.seats !== 0)
     
-            if(flightssearch.length === 0){
-                res.status(404).send("no flights found");
-                }
-            else {
-                res.json(flightssearch);
-             }
+        if (flightssearch.length === 0) {
+            res.status(404).send("No flights found");
+        } else {
+            res.json(flightssearch);
+        }
     //res.json(flightssearch);
 
         };

@@ -1,4 +1,5 @@
 const BookingModel = require("../models/booking.model");  
+const FlightsModel = require("../models/flights.model");
 const bookingController = {};
 
 try {
@@ -44,6 +45,14 @@ try {
         const bookingSaved = await BookingModel.create({
             ...booking,
         });
+
+        const flightseats = await FlightsModel.findByIdAndUpdate(
+            { _id: booking.flight_id },
+            { $inc: {
+                seats: - booking.passangers
+                }
+            }
+        );
 
         res.status(201).json(bookingSaved);
     };
