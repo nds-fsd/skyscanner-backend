@@ -52,7 +52,9 @@ const flightsControllers = {};
                 }
             else {
                 res.json(flightssearch);
+               
              }
+             
     //res.json(flightssearch);
 
         };

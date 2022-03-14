@@ -43,7 +43,7 @@ const saveUser = async (req, res) => {
     const userSaved = await newUser.save();
   
     // We sign a JWT and return it to the user
-    const token = jwt.sign({ id: userSaved._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: userSaved._id }, process.env.JWT_SECRET, {expiresIn: '5h' });
     return res.status(201).json({ token: token });
   } catch (error) {res.status(500).send(error)}};
 
