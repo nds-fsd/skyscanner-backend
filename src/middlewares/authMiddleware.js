@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require('../models/user.model');
+import Role from "../models/role.model";
 
 exports.authMiddleware = async (req, res, next)=> {
     // Token is inside the "Authorization" header, with a value like this:
@@ -22,4 +23,23 @@ exports.authMiddleware = async (req, res, next)=> {
     }
     next();
 
-}
+};
+
+exports.isAdmin = async (req, res, next) => {
+    try {
+      const user = await User.findById(req.sessionUser);
+      const roles = await Role.find({ _id: { $in: user.roles } });
+  
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i].name === "admin") {
+          next();
+          return;
+        }
+      }
+  
+      return res.status(403).json({ message: "Require Admin Role!" });
+    } catch (error) {
+      console.log(error)
+      return res.status(500).send({ message: error });
+    }
+  };

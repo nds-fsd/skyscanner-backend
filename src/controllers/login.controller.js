@@ -6,7 +6,7 @@ const User = require("../models/user.model");
 const login = async (req, res) => {
 try {
   const { email, password } = req.body;
-  const user = await User.findOne({ email: email }).exec();
+  const user = await User.findOne({ email: email }).populate("roles");
   
   if (!user) return res.status(400).send("Invalid email and/or password");
 

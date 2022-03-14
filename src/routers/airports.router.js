@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {authMiddleware} = require('../middlewares/authMiddleware');
-
+const {isAdmin} = require('../middlewares/authMiddleware');
 const {
    getallAirports, 
    getOneAirport, 
@@ -13,12 +13,12 @@ const {
 
 router.route('/')
    .get(authMiddleware, getallAirports)
-   .post(authMiddleware, createAirport);
+   .post(authMiddleware,isAdmin, createAirport);
 
 router.route("/:id")
   .get(getOneAirport)
-  .delete(authMiddleware, removeById)
-  .put(authMiddleware, updateByID);
+  .delete(authMiddleware,isAdmin, removeById)
+  .put(authMiddleware,isAdmin, updateByID);
    
 router.route('/search/:text')
    .get(searchAirports);
