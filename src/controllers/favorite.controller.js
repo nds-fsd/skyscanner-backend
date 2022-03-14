@@ -51,4 +51,21 @@ try {
     res.status(500).send(error);
 }
 
+try {
+    favoriteControllers.removeFavorite = async (req, res) => {
+        const fav = req.body;
+    
+        const deletedFav = await favoriteModel.findOneAndDelete({
+            flight_id: fav.flight_id,
+            user_id: fav.user_id
+        }).exec();
+
+        console.log(deleteFav);
+
+        res.status(201).send("El vuelo ha sido elminado de favoritos correctamente");
+    };
+} catch (error) {
+    res.status(500).send(error);
+}
+
 module.exports = favoriteControllers;

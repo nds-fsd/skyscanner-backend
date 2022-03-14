@@ -46,7 +46,7 @@ try {
             ...booking,
         });
 
-        const flightseats = await FlightsModel.findByIdAndUpdate(
+        await FlightsModel.findByIdAndUpdate(
             { _id: booking.flight_id },
             { $inc: {
                 seats: - booking.passangers
@@ -55,6 +55,23 @@ try {
         );
 
         res.status(201).json(bookingSaved);
+    };
+} catch (error) {
+    res.status(500).send(error);
+}
+
+try {
+    bookingController.removeBooking = async (req, res) => {
+        const booking = req.body;
+    
+        const deletedBooking = await BookingModel.findOneAndDelete({
+            flight_id: booking.flight_id,
+            user_id: booking.user_id
+        }).exec();
+
+        console.log(deletedBooking);
+
+        res.status(201).send("La reserva ha sido elminada correctamente");
     };
 } catch (error) {
     res.status(500).send(error);
