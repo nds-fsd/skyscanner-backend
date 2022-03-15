@@ -1,7 +1,5 @@
 const airlineModel = require("../models/airlines.model");
 
-// Controllers that handle routes' requests
-
 const all = async (req, res) => {
   const airlines = await airlineModel.getAll();
   res.json(airlines);

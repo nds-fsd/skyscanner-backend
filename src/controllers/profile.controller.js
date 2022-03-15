@@ -1,4 +1,5 @@
-const User =require("../models/user.model");
+const User = require("../models/user.model");
+const flightsModel = require("../models/flights.model");
 const bcrypt = require("bcrypt");
 const mongoose = require('mongoose');
 const jwt = require("jsonwebtoken");
@@ -6,20 +7,20 @@ const {validationResult} = require("express-validator");
 
 const profileControllers = {};
 try {
-profileControllers.removeProfileById = (req, res) => {
-  const id = req.params.id;
-  
-  User.findByIdAndDelete(id, {}, (error, result) =>{
-   if(error){
-       res.status(500).json({error: error.message});
-   }else if(!result){
-       res.status(404).send();
-   }else{
-       res.json(result);
-   }
-  })
-};
-}catch (error) {res.status(500).send(error)};
+  profileControllers.removeProfileById = (req, res) => {
+    const id = req.params.id;
+    
+    User.findByIdAndDelete(id, {}, (error, result) =>{
+      if(error) {
+          res.status(500).json({error: error.message});
+      } else if (!result) {
+          res.status(404).send();
+      } else {
+          res.json(result);
+      }
+    })
+  };
+} catch (error) {res.status(500).send(error)};
 
 try  {
 profileControllers.updateProfileById = async (req, res) => {
@@ -106,19 +107,21 @@ profileControllers.changePassword = (req, res, next) => {
     };} catch (error) {res.status(500).send(error)};
 
 try {
-profileControllers.getOneUser = async (req, res) => {
-      const id = req.params.id; 
-      User.findById(id, {}, {} , (error, profile) => {
-    
-         if(error){
-             res.status(500).json({error: error.message});
-         } else if(!profile){
-             res.status(404).send();
-         } else {
-             res.json(profile);
-         }
-     }); 
-    };} catch (error) {res.status(500).send(error)};
+  profileControllers.getOneUser = async (req, res) => {
+    const id = req.params.id; 
+    User.findById(id, {}, {} , (error, profile) => {
+      if(error) {
+          res.status(500).json({error: error.message});
+      } else if (!profile) {
+          res.status(404).send();
+      } else {
+          res.json(profile);
+      }
+  }); 
+  };
+} catch (error) {
+  res.status(500).send(error)}
+;
 
 try {  
 profileControllers.getOneUserbyEmail = async (req, res) => {
@@ -137,14 +140,30 @@ profileControllers.addToFavFlight = async (req, res) => {
 
 };} catch (error) {res.status(500).send(error)};
 
+try {
 profileControllers.addBooking = async (req, res) => {
   
   const id = req.params.id;
   const data = req.body;
   const addbooking = await User.findByIdAndUpdate({_id: id}, {$push: {booking: data.booking}});
+  
+  
   res.json({message: "Add booking"});
 
-}
+}; } catch (error) {res.status(500).send(error)};
+
+profileControllers.deleteOneBooking = async (req, res) => {
+
+  const id = req.params.id;
+  const data = req.body;
+  
+  delbooking = await User.findByIdAndUpdate({_id:id},
+    { $pull: { booking: {"_id":data.bookingId} } },
+    { safe: true, multi:true }
+  );
+  
+  res.json({message: "remove booking"});
+};
 
   
     module.exports = profileControllers;

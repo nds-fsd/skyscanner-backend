@@ -5,22 +5,7 @@ const userSchema = new mongoose.Schema({
     email: {type:String, required:true},
     password:{type:String, required:true},
     prefairport: {type:String},
-    fav: [
-        {   
-            outbound:String,
-            return: String
     
-        }
-]
-,
-    booking: [
-            {   
-            outbound:String,
-            return: String
-        
-            }
-    ]
-
 });
 
 

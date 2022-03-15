@@ -23,8 +23,7 @@ const saveUser = async (req, res) => {
     try {
     
     const { email, password, firstname, lastname } = req.body;
-
-    //TODO: comprobar si ya existe el email en la BD
+    
     const emailexist = await User.findOne({email}).exec();
 
     if (emailexist){
