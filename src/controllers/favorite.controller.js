@@ -60,7 +60,7 @@ try {
             user_id: fav.user_id
         }).exec();
 
-        console.log(deleteFav);
+        console.log(deletedFav);
 
         res.status(201).send("El vuelo ha sido elminado de favoritos correctamente");
     };
