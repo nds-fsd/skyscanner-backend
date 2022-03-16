@@ -2,6 +2,7 @@ const User =require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const {validationResult} = require("express-validator");
+import Role from "../models/role.model";
 
 const findAll = (req, res) => {
     const handleSuccess = (users) => {
@@ -22,7 +23,7 @@ const saveUser = async (req, res) => {
     }
     try {
     
-    const { email, password, firstname, lastname } = req.body;
+    const { firstname, lastname, email, password, roles} = req.body;
     
     const emailexist = await User.findOne({email}).exec();
 
@@ -39,11 +40,22 @@ const saveUser = async (req, res) => {
       lastname: lastname,      
       email: email,
       password: passwordHashed,
+     
+
     });
+    // checking for roles
+    if (req.body.roles) {
+      const foundRoles = await Role.find({ name: { $in: roles } });
+      newUser.roles = foundRoles.map((role) => role._id);
+    } else {
+      const role = await Role.findOne({ name: "user" });
+      newUser.roles = [role._id];
+    }
+
     const userSaved = await newUser.save();
   
     // We sign a JWT and return it to the user
-    const token = jwt.sign({ id: userSaved._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: userSaved._id }, process.env.JWT_SECRET, {expiresIn: '5h' });
     return res.status(201).json({ token: token });
   } catch (error) {res.status(500).send(error)}};
 
