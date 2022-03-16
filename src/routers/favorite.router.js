@@ -9,11 +9,6 @@ FavoriteRouter.route("/")
     .post(authMiddleware, saveFav)
     .delete(authMiddleware, removeFavorite)
 
-    .get(getFavs)
-    .post(saveFav)
-    .delete(removeFavorite)
-
-
 
 FavoriteRouter.route("/:id")
     .get(authMiddleware,getFavFlights);
