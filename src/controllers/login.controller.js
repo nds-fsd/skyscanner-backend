@@ -6,7 +6,7 @@ const User = require("../models/user.model");
 const login = async (req, res) => {
 try {
   const { email, password } = req.body;
-  const user = await User.findOne({ email: email }).exec();
+  const user = await User.findOne({ email: email }).populate("roles");
   
   if (!user) return res.status(400).send("Invalid email and/or password");
 
@@ -15,7 +15,7 @@ try {
   if (!pwdIsValid) return res.status(400).send("Invalid email and/or password");
 
   // If everything matches, we generate a JWT and send it back to the user
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {expiresIn: '5h'});
   
   return res.status(200).json({ token: token });
 
