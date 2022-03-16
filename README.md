@@ -37,6 +37,7 @@ Por otro lado, la aplicación se conecta y giarda los datos a una BBDD de MongoD
 <img src="./data/images/mongo.png" alt="drawing" width="200"/>
 
 </br>
+
 Todo esto se consigue trabajando bajo el paraguas del motor de ejecución **nodeJs**.
 
 </br>
