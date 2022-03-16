@@ -1,5 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
+import { createRoles} from "./src/actions/initialSetup";
+
 //const options = { useNewUrlParser: true, useUnifiedTopology: true };
 try {
   mongoose.connect( process.env.DB_ATLAS, {useNewUrlParser: true, useUnifiedTopology: true}, () =>
@@ -14,14 +16,14 @@ mongo.once('open', () => {
   console.log('Connected to SkyScannerDB')
 })
 
-
 const express = require("express");
 const app = express();
+createRoles();
+
 
 const { json, urlencoded } = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
-
 
 app.use(cors({
   origin: '*',
@@ -30,6 +32,7 @@ app.use(cors({
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan("dev"));
+
 
 const airlines = require("./src/routers/airlines.router");
 app.use("/airlines", airlines);

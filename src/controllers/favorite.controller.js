@@ -56,11 +56,10 @@ try {
         const fav = req.body;
     
         const deletedFav = await favoriteModel.findOneAndDelete({
-            flight_id: fav.flight_id,
-            user_id: fav.user_id
+            flight_id: fav.flight_id
         }).exec();
 
-        console.log(deleteFav);
+        console.log(deletedFav);
 
         res.status(201).send("El vuelo ha sido elminado de favoritos correctamente");
     };

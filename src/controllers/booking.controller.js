@@ -9,7 +9,7 @@ try {
         const searchResult = await BookingModel.find({"user_id": user_id}).populate("flight_id");
         
         if(searchResult.length === 0){
-            res.send("You don't have any favorite flight");
+            res.send("You don't have any booked flight");
         } else {
             const bookedFlights = searchResult.map(f => f.flight_id);
             res.json(bookedFlights);
@@ -38,7 +38,7 @@ try {
 
         if (bookingExists){
             return res.status(409).send({
-                message:"Este vuelo ya reservado"
+                message:"Este vuelo ya está reservado"
             });
         }
 
@@ -65,8 +65,7 @@ try {
         const booking = req.body;
     
         const deletedBooking = await BookingModel.findOneAndDelete({
-            flight_id: booking.flight_id,
-            user_id: booking.user_id
+            flight_id: booking.flight_id
         }).exec();
 
         console.log(deletedBooking);
