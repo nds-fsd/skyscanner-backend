@@ -56,8 +56,7 @@ try {
         const fav = req.body;
     
         const deletedFav = await favoriteModel.findOneAndDelete({
-            flight_id: fav.flight_id,
-            user_id: fav.user_id
+            flight_id: fav.flight_id
         }).exec();
 
         console.log(deletedFav);
