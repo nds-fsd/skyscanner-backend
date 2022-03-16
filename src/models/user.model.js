@@ -12,20 +12,7 @@ const userSchema = new mongoose.Schema({
           ref: "Role",
         },
       ],
-    
-    fav: {type:Array},
-    /*[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "flights"
-    }],*/
-    booking: [
-            {   
-            outbound:String,
-            return: String
-        
-            }
-    ]
-
+  
 });
 
 

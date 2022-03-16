@@ -10,7 +10,7 @@ ProfileRouter.route('/:id')
 ProfileRouter.route("/:id")
     //.get(searchFlightById)
     .delete(authMiddleware, removeProfileById)
-    .put(updateProfileById);
+    .put(authMiddleware, updateProfileById);
 
 ProfileRouter.route("/favairport/:id")
     .put(authMiddleware, addAirportById);

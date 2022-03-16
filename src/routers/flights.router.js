@@ -13,11 +13,11 @@ router.route('/search')
     
 router.route("/:id")
     //.get(searchFlightById)
-    .delete(authMiddleware, removeFlightById)
+    .delete(authMiddleware, isAdmin, removeFlightById)
     .put(authMiddleware,isAdmin, updateById)
     .get(authMiddleware, getOneFlight);
 
 router.route("/booking/:id")
-    .put(authMiddleware, updateSeats);
+    .put(authMiddleware, isAdmin, updateSeats);
 
 module.exports = router;
