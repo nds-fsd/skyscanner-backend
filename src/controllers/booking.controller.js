@@ -65,8 +65,7 @@ try {
         const booking = req.body;
     
         const deletedBooking = await BookingModel.findOneAndDelete({
-            flight_id: booking.flight_id,
-            user_id: booking.user_id
+            flight_id: booking.flight_id
         }).exec();
 
         console.log(deletedBooking);
