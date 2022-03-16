@@ -4,9 +4,15 @@ const FavoriteRouter = express.Router();
 const {authMiddleware} = require('../middlewares/authMiddleware');
 
 FavoriteRouter.route("/")
+
     .get(authMiddleware, getFavs)
     .post(authMiddleware, saveFav)
     .delete(authMiddleware, removeFavorite)
+
+    .get(getFavs)
+    .post(saveFav)
+    .delete(removeFavorite)
+
 
 
 FavoriteRouter.route("/:id")

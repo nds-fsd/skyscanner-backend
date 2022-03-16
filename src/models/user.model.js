@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     email: {type:String, required:true},
     password:{type:String, required:true},
     prefairport: {type:String},
+
     roles: [
         {
           type: mongoose.Schema.Types.ObjectId,
@@ -13,6 +14,9 @@ const userSchema = new mongoose.Schema({
         },
       ],
   
+
+    
+
 });
 
 
