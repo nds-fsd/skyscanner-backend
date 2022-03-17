@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require('../models/user.model');
-import Role from "../models/role.model";
+const Role = require("../models/role.model") ;
 
 exports.authMiddleware = async (req, res, next)=> {
     

@@ -1,6 +1,6 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-import { createRoles} from "./src/actions/initialSetup";
+const {createRoles} = require("./src/actions/initialSetup");
 
 //const options = { useNewUrlParser: true, useUnifiedTopology: true };
 try {

@@ -1,8 +1,5 @@
 const User = require("../models/user.model");
-const flightsModel = require("../models/flights.model");
 const bcrypt = require("bcrypt");
-const mongoose = require('mongoose');
-const jwt = require("jsonwebtoken");
 const {validationResult} = require("express-validator");
 
 const profileControllers = {};
