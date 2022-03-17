@@ -30,7 +30,7 @@ La aplicación es capaz de recibir peticones HTTP (API REST), procesarlas y gene
 
 </br>
 
-Por otro lado, la aplicación se conecta y giarda los datos a una BBDD de MongoDB.
+Por otro lado, la aplicación se conecta y guarda los datos a una BBDD de MongoDB, ala cual accederemos mediante el servicio cloud **Mongo Atlas**.
 
 </br>
 
@@ -46,6 +46,12 @@ Todo esto se consigue trabajando bajo el paraguas del motor de ejecución **node
 
 </br>
 
+## Esquema Base de Datos
+
+La base de datos se organiza de la siguiente manera:
+
+![alt text](./data//images/bbdd.png)
+
 ## Librerias
 Las librerias usadas en la aplicación son:
 
@@ -60,6 +66,49 @@ Las librerias usadas en la aplicación son:
 | express-validator | Validación de datos en las peticiones |
 
 Todas ellas han sido instaladas y gestionadas mediante el gestor de paquetes **npm**.
+## Pieza de código destacables
+
+Una parte del codigo que nos gustaria mencionar es la función de guardar una reserva.
+
+```JSX
+try {
+    bookingController.saveBooking = async (req, res) => {
+        const booking = req.body;
+    
+        const bookingExists = await BookingModel.findOne({
+            ...booking
+        }).exec();
+
+        if (bookingExists){
+            return res.status(409).send({
+                message:"Este vuelo ya está reservado"
+            });
+        }
+
+        const bookingSaved = await BookingModel.create({
+            ...booking,
+        });
+
+        await FlightsModel.findByIdAndUpdate(
+            { _id: booking.flight_id },
+            { $inc: {
+                seats: - booking.passangers
+                }
+            }
+        );
+
+        res.status(201).json(bookingSaved);
+    };
+} catch (error) {
+    res.status(500).send(error);
+}
+```
+Esta función recoge el objeto reserva, comprueba si ya existe este objeto en la BBDD, si es así responde para avisar al cliente, si no es asi guarda el obejeto en base de datos y posteriormente accede al objeto vuelo asociado a la reserva y reduce el valor del atributo seats en función de los pasajeros de dicha reserva.
+
+## Deploy
+El dolpoy se ejecuta tal y como muestra la siguiente ilustración:
+
+![alt text](./data//images/deploy-backend.png)
 ## Mapa estructural del código
 
 ```
