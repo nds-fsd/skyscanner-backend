@@ -46,12 +46,6 @@ Todo esto se consigue trabajando bajo el paraguas del motor de ejecución **node
 
 </br>
 
-## Esquema Base de Datos
-
-La base de datos se organiza de la siguiente manera:
-
-![alt text](./data//images/bbdd.png)
-
 ## Librerias
 Las librerias usadas en la aplicación son:
 
@@ -161,13 +155,13 @@ backend
 
 La Base de datos es de tipo NoSQL y está creada en un cluster de MongoDB Atlas. Consta de 7 colecciones:
 
-    • airlines
-    • airports
     • bookings
     • favorites
     • flights
     • roles
     • users
+
+![alt text](./data//images/bbdd.png)
 
 En flights residen todos los vuelos disponibles organizados por ciudad de origen (from), ciudad de destino(to), dedate (fecha de salida), precio, airline, tiempo de vuelo y seats (asientos disponibles por vuelo).
 Las reservas efectuadas por el cliente (al igual que los vuelos favoritos) son guardadas en una tabla intermedia bookings donde se guarda el id del usuario (cliente) y el id del vuelo reservado.
