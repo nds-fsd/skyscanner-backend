@@ -157,6 +157,26 @@ backend
       └─ user.router.js
 
 ```
+## Base de datos
+
+La Base de datos es de tipo NoSQL y está creada en un cluster de MongoDB Atlas. Consta de 7 colecciones:
+
+    • airlines
+    • airports
+    • bookings
+    • favorites
+    • flights
+    • roles
+    • users
+
+En flights residen todos los vuelos disponibles organizados por ciudad de origen (from), ciudad de destino(to), dedate (fecha de salida), precio, airline, tiempo de vuelo y seats (asientos disponibles por vuelo).
+Las reservas efectuadas por el cliente (al igual que los vuelos favoritos) son guardadas en una tabla intermedia bookings donde se guarda el id del usuario (cliente) y el id del vuelo reservado.
+Estos datos están referenciados a los modelos de user y flights, para poder listar los vuelos reservados por cliente en una tabla en la sección profile. 
+Cada reserva efectuada, resta un asiento en el vuelo a través del controlador bookingSaved que se encarga de guardar la reserva y restar el numero de pasajeros a los seats del vuelo. Con esto conseguimos tener un control de las plazas disponibles en todo momento.
+
+Por otro lado, la colección roles, nos permite asignar un role a todos los usuarios. Por defecto, los que son creados por el cliente, son usuario básicos que pueden operar en nuestra web sin dificultades. Y existen usuarios con el rol administrador que pueden operar con permisos más avanzados como la eliminación de vuelos, aerolineas, aeropuertos,  listar todos los usuarios, vuelos etc.
+Todo el backend está securizado a traves de jwt, asignando un token a cada usuario y solo permitiendo acciones en la web si disponen de uno, a excepción de la búsqueda de vuelos que se hace sin restricciones.
+
 ## Contribuyentes
 El equipo que ha llevado a cabo el proyecto esta formado por:
 - Eric Capella ([Github Account](https://github.com/ericcapella))
