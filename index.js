@@ -58,6 +58,6 @@ app.use("/favorite", FavoriteRouter);
 const BookingRouter = require("./src/routers/booking.router")
 app.use("/booking", BookingRouter);
 
-app.listen(3020, () => {
-  console.log(`REST API listening on http://localhost:3020/`);
+app.listen(process.env.PORT, () => {
+  console.log('REST API listening on', process.env.PORT);
 });
